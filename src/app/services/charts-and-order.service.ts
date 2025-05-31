@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = 'http://localhost:5000/api/orders';
-  private apiUrl2 = 'http://localhost:5000/api/dashboard/get-details';
+  private apiUrl = `${environment.production}/api/orders`;
+  private apiUrl2 = `${environment.production}/api/dashboard/get-details`;
 
-  private dashboard = 'http://localhost:5000/api/dashboard';
-  private adminUrl = 'http://localhost:5000/api/admin';
+  private dashboard = `${environment.production}/api/dashboard`;
+  private adminUrl = `${environment.production}/api/admin`;
 
   constructor(private http: HttpClient) {}
 

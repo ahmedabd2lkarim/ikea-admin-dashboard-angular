@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PageOneService {
-  private apiUrl = 'http://localhost:5000/api';
+  private apiUrl = `${environment.baseURL}/api`;
 
   constructor(private http: HttpClient) {}
 
@@ -38,7 +39,6 @@ export class PageOneService {
       headers: this.getAuthHeaders(),
     });
   }
-  
 
   deleteVendor(vendorId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/admin/delete-user/${vendorId}`, {
@@ -47,26 +47,31 @@ export class PageOneService {
   }
 
   updateUser(userId: string, updatedData: any): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/admin/update-user/${userId}`, updatedData, {
-      headers: this.getAuthHeaders(),
-    });
+    return this.http.patch(
+      `${this.apiUrl}/admin/update-user/${userId}`,
+      updatedData,
+      {
+        headers: this.getAuthHeaders(),
+      }
+    );
   }
 
   updateVendor(vendorId: string, updatedData: any): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/admin/update-user/${vendorId}`, updatedData, {
-      headers: this.getAuthHeaders(),
-    });
+    return this.http.patch(
+      `${this.apiUrl}/admin/update-user/${vendorId}`,
+      updatedData,
+      {
+        headers: this.getAuthHeaders(),
+      }
+    );
   }
-  
+
   acceptVendor(vendorId: string) {
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
     return this.http.patch(
       `${this.apiUrl}/admin/accept-vendor/${vendorId}`,
       { isAccepted: true },
       { headers: { Authorization: `Bearer ${token}` } }
     );
   }
-  
-  
-  
 }

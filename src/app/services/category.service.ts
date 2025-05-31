@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Icategory } from '../model/icategory';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  private apiUrl = 'http://localhost:5000/api/categories';
+  private apiUrl = `${environment.baseURL}/api/categories`;
   constructor(private http: HttpClient) {}
   private getHeaders(): HttpHeaders {
   const token = localStorage.getItem('token');
